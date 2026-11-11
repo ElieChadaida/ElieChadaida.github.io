@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Elie Chadaida, pre-doctoral research assistant in macroeconomics at the London School of Economics.">
+<title>Elie Chadaida</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: a narrow academic column; nav switches between two views (#home, #research) on the hash. */
+:root{
+  --bg:#f6f0e4; --surface:#fcf8f0; --fg:#4a4238; --muted:#857a6c; --line:#e2d8c6;
+  --accent:#9c3f2b; --accent-soft:#f0e2d8;
+  --display:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+:root{color-scheme:light}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+a:hover,a:focus-visible{border-bottom-color:currentColor;outline:none}
+.wrap{max-width:860px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+
+header{display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;padding-block:28px 20px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-size:1.35rem;color:var(--fg)}
+nav{display:flex;gap:22px}
+nav a{font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-block:4px}
+nav a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+
+section.view{display:none;padding-top:44px}
+section.view.active{display:block}
+
+/* Home */
+.hero{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+@media (max-width:620px){.hero{grid-template-columns:1fr}}
+.photo{width:200px;max-width:100%;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--accent-soft);
+  display:grid;place-items:center;font-family:var(--display);font-size:3rem;color:var(--accent)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.hero h1{font-size:clamp(2rem,5vw,2.8rem)}
+.lede{font-size:1.15rem;color:var(--muted);margin-top:10px;max-width:60ch}
+.bio{margin-top:22px;display:grid;gap:14px;max-width:62ch}
+.facts{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:.95rem}
+.facts dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.facts dd{margin:0}
+.docs{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid var(--accent);border-radius:3px;color:var(--accent);
+  font-weight:600;font-size:.95rem}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.primary:hover{border-bottom-color:var(--accent)}
+.btn.soon{border-color:var(--line);color:var(--muted);border-style:dashed}
+
+/* Research */
+.sec{display:grid;grid-template-columns:150px 1fr;gap:32px;padding-block:28px;border-top:1px solid var(--line)}
+.sec:first-of-type{border-top:0;padding-top:0}
+@media (max-width:620px){.sec{grid-template-columns:1fr;gap:10px}}
+.sec h2{font-size:1rem;font-family:var(--body);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:6px;align-self:start}
+.sec h2::after{content:"";display:block;width:48px;height:2px;background:var(--accent);margin-top:8px}
+.paper{display:grid;gap:8px;padding-block:18px}
+.paper + .paper{border-top:1px dashed var(--line)}
+.paper h3{font-size:1.4rem}
+.meta{font-size:.9rem;color:var(--muted)}
+.meta b{font-weight:600;color:var(--fg)}
+.abs{max-width:64ch}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.links a{font-weight:600;font-size:.92rem;padding:5px 12px;border:1px solid var(--accent);border-radius:3px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.proj{display:grid;gap:4px;padding-block:14px}
+.proj + .proj{border-top:1px dashed var(--line)}
+.proj h3{font-size:1.1rem;font-family:var(--body);font-weight:600}
+.proj p{max-width:64ch;color:var(--muted);font-size:.97rem}
+.note{margin-top:40px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:4px;font-size:.9rem;color:var(--muted)}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (prefers-reduced-motion:no-preference){section.view.active{animation:fade .25s ease}}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <a class="brand" href="#home">Elie Chadaida</a>
+  <nav aria-label="Sections">
+    <a href="#home" data-view="home">Home</a>
+    <a href="#research" data-view="research">Research</a>
+  </nav>
+</header>
+
+<section class="view" id="view-home">
+  <div class="hero">
+    <div class="photo" id="photo"><img src="photo.jpg" alt="Elie Chadaida" width="640" height="800"></div>
+    <div>
+      <h1>Elie Chadaida</h1>
+      <p class="lede">Pre-doctoral research assistant in macroeconomics at the London School of Economics. Applying to PhD programmes in Economics for autumn 2027.</p>
+      <div class="bio">
+        <p>My interests sit at the intersection of behavioural economics and macroeconomics: how heterogeneity across households, in beliefs as much as in income and wealth, shapes the aggregate economy and the distribution of wealth. I am also interested in the intersection of mathematics and economics, and in the new quantitative tools that let macroeconomic theory keep pace with ever richer microdata.</p>
+        <p>I work with Matthias Doepke on the distributional effects of monetary policy and with Ethan Ilzetzki on NASA spending and innovation. Before the LSE I was a trainee at the European Central Bank. I hold an MSc in Finance and Economics from the LSE and an engineering degree in mathematical and financial modelling from CentraleSupélec.</p>
+      </div>
+      <dl class="facts">
+        <dt>Fields</dt><dd>Macroeconomics, behavioural economics, household heterogeneity, computational methods</dd>
+        <dt>Position</dt><dd>Pre-doctoral RA, Centre for Macroeconomics, LSE (2025–)</dd>
+        <dt>Education</dt><dd>MSc Finance &amp; Economics, LSE (Distinction) · Diplôme d'Ingénieur, CentraleSupélec</dd>
+        <dt>Email</dt><dd><a href="mailto:elie.chadaida.n@gmail.com">elie.chadaida.n@gmail.com</a></dd>
+      </dl>
+      <div class="docs">
+        <a class="btn primary" href="CV_ElieChadaida.pdf">CV · PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="view-research">
+  <div class="sec">
+    <h2>Work in progress</h2>
+    <div>
+      <article class="paper">
+        <h3>Direction over Size: Sign Dominance in House-Price Expectations</h3>
+        <p class="meta"><b>Single-authored.</b> Draft, November 2026 · Writing sample</p>
+        <p class="abs">How do households form expectations about house prices? This paper uses two household surveys to show that households form their short-term expectations of house prices mainly in response to the sign of perceived past price growth rather than its size. When the perceived direction of prices turns, expectations jump, because households switch from expecting falls or constant prices to expecting rises. It then studies the consequences of such expectations in a partial-equilibrium lifecycle model with a rent-or-buy decision, in which households hold the beliefs measured in the surveys. Because they wait for prices to turn before expecting them to rise, households delay their purchases, and purchases bunch when prices turn.</p>
+        <div class="tags"><span class="tag">D84</span><span class="tag">E71</span><span class="tag">G51</span><span class="tag">R21</span><span class="tag">R31</span></div>
+        <div class="links"><a href="Chadaida_SignDominance_draft.pdf">Draft · PDF</a></div>
+      </article>
+      <article class="paper">
+        <h3>Who Pays for Optimism?</h3>
+        <p class="meta"><b>Single-authored.</b> Early stage · Abstract coming soon</p>
+        <p class="abs">When house prices rise because some households are optimistic, who gains and who loses? The project joins the asset-price redistribution formula of Fagereng et al. (2025) with a belief-neutral welfare criterion to measure the incidence of a belief-driven boom by age, wealth and belief type, using English and Welsh transaction data and survey evidence on buyers' expectations.</p>
+        <div class="tags"><span class="tag">beliefs</span><span class="tag">housing</span><span class="tag">redistribution</span><span class="tag">welfare</span></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Pre-doctoral work</h2>
+    <div>
+      <article class="proj">
+        <h3>Distributional effects of monetary policy</h3>
+        <p>For Matthias Doepke. A heterogeneous-agent overlapping-generations model with housing tenure choice and nominal assets, built in MATLAB and Python: calibration, steady state and transition dynamics after an inflation shock, solved with the discrete-continuous endogenous grid method. Also extending the Doepke–Schneider sectoral net nominal positions to the latest Federal Reserve Financial Accounts.</p>
+      </article>
+      <article class="proj">
+        <h3>NASA spending and innovation</h3>
+        <p>For Ethan Ilzetzki (with Handlan and Juhász). From raw data to estimates: built the patent databases (1945–2000), matched NASA budget programmes to patent classes from unstructured text using keyword counts, BERT embeddings and an LLM pipeline, and estimated staggered difference-in-differences with doubly robust estimators on a computing cluster. Figures presented at the SED 2026.</p>
+      </article>
+      <article class="proj">
+        <h3>Gender relations and fertility</h3>
+        <p>For Doepke and Kindermann (2026). Assembled cross-country data on childlessness, marriage and gender attitudes from IPUMS, the UN World Marriage Data and the World Values Survey.</p>
+      </article>
+      <article class="proj">
+        <h3>Fiscal rules and fiscal councils</h3>
+        <p>For Ethan Ilzetzki. Literature review and comparative-evidence briefing for the House of Lords Economic Affairs Committee; cross-country regressions of house price-to-rent ratios.</p>
+      </article>
+      <article class="proj">
+        <h3>Wages, work and war bonds in the Second World War</h3>
+        <p>For Ethan Ilzetzki. Documented archival labour-market and bond data sources and digitised state-level war-bond sales.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Earlier work</h2>
+    <div>
+      <article class="proj">
+        <h3>AI exposure of public and private employment in the EU</h3>
+        <p>European Central Bank, with Emilien Alessandrini and Maximilian Freier (2025). Combined a task-based measure of occupational exposure to generative AI with EU-LFS and EU-SILC microdata to measure the exposure of public and private employment across EU countries, and the potential productivity gains and fiscal savings.</p>
+      </article>
+      <article class="proj">
+        <h3>Monetary policy implementation</h3>
+        <p>European Central Bank, Market Operations Analysis Division, trainee (2024–). Managed the databases used to monitor monetary policy implementation and analysed the likely effects of changes to the minimum reserve requirements framework.</p>
+      </article>
+      <article class="proj">
+        <h3>GARCH and LMMR forecasts of implied volatility</h3>
+        <p>MSc thesis, LSE (2024). A daily trading environment with portfolio updates and PnL, using GARCH and LMMR forecasts to run signal strategies on S&amp;P 500 options.</p>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <span>Elie Chadaida · London School of Economics</span>
+  <span>Last updated November 2026</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var views={home:'view-home',research:'view-research'};
+  function show(){
+    var h=(location.hash||'#home').slice(1);
+    if(!views[h])h='home';
+    Object.keys(views).forEach(function(k){
+      document.getElementById(views[k]).classList.toggle('active',k===h);
+    });
+    document.querySelectorAll('nav a').forEach(function(a){
+      if(a.dataset.view===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  show();
+})();
+</script>
+
+</body>
+</html>
